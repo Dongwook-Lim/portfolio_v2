@@ -1,5 +1,11 @@
 import React, { useState, useRef } from 'react';
-import { motion, useSpring, useTransform, MotionValue } from 'motion/react';
+import {
+  motion,
+  useMotionValueEvent,
+  useSpring,
+  useTransform,
+  MotionValue,
+} from 'motion/react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { useNavigate } from 'react-router';
@@ -37,6 +43,9 @@ export function ContactPanel({
   ww,
 }: ContactPanelProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [activeMobileIndex, setActiveMobileIndex] = useState<number | null>(
+    null,
+  );
   const containerRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
   const { settings } = useAdmin();
@@ -61,10 +70,29 @@ export function ContactPanel({
 
   const reverseTextX = useTransform(textX, (v) => -v);
 
+  useMotionValueEvent(smoothScrollX, 'change', () => {
+    setActiveMobileIndex(null);
+  });
+
+  const toggleMobileGroup = (index: number) => {
+    setActiveMobileIndex((currentIndex) =>
+      currentIndex === index ? null : index,
+    );
+  };
+
+  const handleMobileGroupClick = (
+    event: React.MouseEvent<HTMLButtonElement>,
+    index: number,
+  ) => {
+    event.stopPropagation();
+    toggleMobileGroup(index);
+  };
+
   return (
     <section
       ref={containerRef}
       className="w-[100vw] h-full shrink-0 bg-[#e5e5e5] flex flex-col items-center justify-start relative overflow-hidden z-40 ring-2 ring-[#e5e5e5]"
+      onClick={() => setActiveMobileIndex(null)}
       onMouseMove={handleMouseMove}
     >
       {/* Floating Images Container (Below Text) */}
@@ -99,30 +127,83 @@ export function ContactPanel({
       </div>
 
       {/* Mobile Typography */}
-      <motion.div
-        className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none md:hidden"
-      >
+      <motion.div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none md:hidden">
         <div className="flex w-[95vw] max-w-[30rem] flex-col">
-          <motion.span
-            className="text-left text-[18vw] leading-[0.86]"
+          <motion.div
+            className="flex w-full justify-start text-left text-[18vw] leading-[0.86]"
             style={{
               x: textX,
               fontFamily: '"Playfair Display", serif',
               color: '#111',
             }}
           >
-            CONTACT
-          </motion.span>
-          <motion.span
-            className="text-right text-[18vw] leading-[0.86]"
+            {wordGroups.slice(0, 2).map((group, i) => {
+              const isActive = activeMobileIndex === i;
+              return (
+                <div key={group.chars.join('')} className="relative">
+                  <motion.img
+                    src={group.img}
+                    alt=""
+                    className="absolute bottom-[calc(100%+3rem)] left-1/2 h-auto max-w-none w-[40vw] shadow-[0_30px_60px_rgba(0,0,0,0.3)] pointer-events-none"
+                    style={{ translateX: '-50%' }}
+                    initial={false}
+                    animate={{
+                      scale: isActive ? 1 : 0.82,
+                      opacity: isActive ? 1 : 0,
+                      y: isActive ? 0 : -20,
+                      rotate: isActive ? (i === 0 ? 3 : -3) : 0,
+                    }}
+                    transition={{ type: 'spring', damping: 30, stiffness: 200 }}
+                  />
+                  <motion.button
+                    type="button"
+                    className="cursor-pointer appearance-none border-0 bg-transparent p-0 text-[18vw] font-normal leading-[0.86] pointer-events-auto"
+                    aria-pressed={isActive}
+                    onClick={(event) => handleMobileGroupClick(event, i)}
+                    animate={{ y: isActive ? '-12vw' : 0 }}
+                    transition={{ type: 'spring', stiffness: 200, damping: 30 }}
+                  >
+                    {group.chars.join('')}
+                  </motion.button>
+                </div>
+              );
+            })}
+          </motion.div>
+          <motion.div
+            className="flex w-full justify-end text-right text-[18vw] leading-[0.86]"
             style={{
               x: reverseTextX,
               fontFamily: '"Playfair Display", serif',
               color: '#111',
             }}
           >
-            ME
-          </motion.span>
+            <div className="relative">
+              <motion.img
+                src={wordGroups[3].img}
+                alt=""
+                className="absolute top-[calc(100%+3rem)] left-1/2 h-auto max-w-none w-[30vw] shadow-[0_30px_60px_rgba(0,0,0,0.3)] pointer-events-none"
+                style={{ translateX: '-50%' }}
+                initial={false}
+                animate={{
+                  scale: activeMobileIndex === 3 ? 1 : 0.82,
+                  opacity: activeMobileIndex === 3 ? 1 : 0,
+                  y: activeMobileIndex === 3 ? 0 : 20,
+                  rotate: activeMobileIndex === 3 ? -3 : 0,
+                }}
+                transition={{ type: 'spring', damping: 30, stiffness: 200 }}
+              />
+              <motion.button
+                type="button"
+                className="cursor-pointer appearance-none border-0 bg-transparent p-0 text-[18vw] font-normal leading-[0.86] pointer-events-auto"
+                aria-pressed={activeMobileIndex === 3}
+                onClick={(event) => handleMobileGroupClick(event, 3)}
+                animate={{ y: activeMobileIndex === 3 ? '12vw' : 0 }}
+                transition={{ type: 'spring', stiffness: 200, damping: 30 }}
+              >
+                {wordGroups[3].chars.join('')}
+              </motion.button>
+            </div>
+          </motion.div>
         </div>
       </motion.div>
 
