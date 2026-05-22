@@ -59,6 +59,8 @@ export function ContactPanel({
     return ww * 0.2 * (1 - progress);
   });
 
+  const reverseTextX = useTransform(textX, (v) => -v);
+
   return (
     <section
       ref={containerRef}
@@ -96,9 +98,37 @@ export function ContactPanel({
         })}
       </div>
 
-      {/* Typography */}
+      {/* Mobile Typography */}
       <motion.div
-        className="relative z-20 flex items-center justify-center w-full pt-[16vh] md:pt-[20vh] pointer-events-none"
+        className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none md:hidden"
+      >
+        <div className="flex w-[95vw] max-w-[30rem] flex-col">
+          <motion.span
+            className="text-left text-[18vw] leading-[0.86]"
+            style={{
+              x: textX,
+              fontFamily: '"Playfair Display", serif',
+              color: '#111',
+            }}
+          >
+            CONTACT
+          </motion.span>
+          <motion.span
+            className="text-right text-[18vw] leading-[0.86]"
+            style={{
+              x: reverseTextX,
+              fontFamily: '"Playfair Display", serif',
+              color: '#111',
+            }}
+          >
+            ME
+          </motion.span>
+        </div>
+      </motion.div>
+
+      {/* Desktop Typography */}
+      <motion.div
+        className="relative z-20 hidden items-center justify-center w-full pt-[20vh] pointer-events-none md:flex"
         style={{ x: textX }}
       >
         <div className="flex justify-center items-center -mt-[2vh] md:-mt-[7vh]">
