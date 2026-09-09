@@ -155,21 +155,22 @@ export function LandingPages({
           <p className="mb-6">
             Like film photography,
             <br />
-            this space captures moments
+            this portfolio holds moments
             <br />
-            as you move through it.
+            through light, texture, and time.
             <br />
-            Each scroll reveals a new frame,
+            Each frame is a quiet record,
             <br />
-            shaped by timing, motion, and detail.
+            shaped by patience, place, and feeling.
           </p>
           <p>
-            Like memories, these moments
+            Each photograph holds a moment
             <br />
-            don’t just appear, but stay —<br />
-            where design and code come together
+            that light briefly reveals,
             <br />
-            to linger in your memory
+            then carries its quiet trace
+            <br />
+            into the days that follow.
           </p>
         </motion.div>
 
@@ -265,8 +266,8 @@ export function LandingPages({
           onMouseLeave={() => setIsHovering(false)}
         >
           <span className="font-bold mb-2 block text-center">(01)</span>I am a
-          web developer with a background in architecture, where I developed a
-          strong sense of structure, space, and visual balance.
+          film photographer drawn to quiet places, where natural light, texture,
+          and small details turn everyday scenes into lasting memories.
         </motion.div>
 
         {/* Elements from Original Panel 3 (Positioned 100vw ~ 200vw) */}
@@ -274,10 +275,9 @@ export function LandingPages({
           className="absolute top-[20%] left-[110vw] w-[35vw] md:w-[20vw] z-20 font-['Inter'] text-[10px] md:text-sm leading-relaxed"
           style={{ x: p3Text1X }}
         >
-          <span className="font-bold mb-1 block">(02)</span>I enjoy creating
-          interactive web experiences that invite users to move through
-          typography, motion, and visual details as if they were exploring a
-          carefully designed space.
+          <span className="font-bold mb-1 block">(02)</span>I enjoy walking with
+          a camera, waiting for quiet moments, natural light, and honest details
+          to settle into a frame.
         </motion.div>
 
         <motion.div
@@ -285,9 +285,9 @@ export function LandingPages({
           style={{ x: p3Text2X }}
         >
           <span className="font-bold mb-1 block">(03)</span>
-          My work focuses on connecting design and code to build digital moments
-          that feel intentional, memorable, and quietly immersive beyond the
-          surface of the screen.
+          My work focuses on the feeling a photograph keeps, connecting light,
+          place, and memory into images that remain long after the moment has
+          passed.
         </motion.div>
 
         <motion.div
