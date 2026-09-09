@@ -115,18 +115,19 @@ export function LandingPages({
       <section className="w-[100vw] h-full relative flex items-center justify-center shrink-0 bg-[#000000] text-white overflow-hidden">
         {/* Top Text - Slides down from top */}
         <motion.h1
-          className="uppercase text-[clamp(4rem,17vw,25rem)] leading-[0.85] tracking-[-0.03em] absolute top-[10%] md:top-[8%] left-[4vw] z-10 pointer-events-none"
+          className="uppercase text-[clamp(4.5rem,18vw,25rem)] md:text-[clamp(4rem,17vw,25rem)] leading-[0.85] tracking-[-0.03em] absolute top-[14%] md:top-[8%] left-[4vw] z-10 pointer-events-none"
           style={{ x: p1TextX, fontFamily: '"Anton", sans-serif' }}
           initial={{ y: -100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 1.3 }}
         >
-          WEB DEVELOPER
+          <span className="block">FILM</span>
+          <span className="block">PHOTOGRAPHY</span>
         </motion.h1>
 
         {/* Left Image Box - Slides in from left */}
         <motion.div
-          className="absolute left-[5vw] md:left-[3vw] top-[19%] md:top-[max(32%,8vh_+_15vw)] z-20"
+          className="absolute left-[5vw] md:left-[3vw] bottom-[33%] md:bottom-[8%] z-20"
           style={{ x: p1ImgX }}
         >
           <motion.div
@@ -145,7 +146,7 @@ export function LandingPages({
 
         {/* Middle Texts - Slides up from bottom */}
         <motion.div
-          className="absolute left-[4vw] md:left-[32vw] top-[45%] md:top-[max(32%,8vh_+_15vw)] w-[90vw] md:w-[20vw] z-20 font-['Inter'] text-xs md:text-[14px] leading-[1.4] text-[#e0e0e0] pointer-events-none"
+          className="absolute left-[4vw] md:left-[32vw] bottom-[8%] w-[90vw] md:w-[20vw] z-20 font-['Inter'] text-xs md:text-[14px] leading-[1.4] text-[#e0e0e0] pointer-events-none"
           style={{ x: p1SubTextX }}
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -170,22 +171,6 @@ export function LandingPages({
             <br />
             to linger in your memory
           </p>
-        </motion.div>
-
-        {/* Bottom Chapters List - Slides up from bottom */}
-        <motion.div
-          className="absolute left-[4vw] md:left-[32vw] top-[80%] md:top-[max(65%,8vh_+_15vw_+_20vh)] z-20 font-['Inter'] text-xs md:text-[14px] leading-[1.4] text-[#e0e0e0] pointer-events-none"
-          initial={{ y: 100, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 1.8 }}
-        >
-          <p className="text-[#888] mb-1">Chapters:</p>
-          <ul className="flex flex-col">
-            <li>Intro.</li>
-            <li>About me</li>
-            <li>Gallery</li>
-            <li>Contact me</li>
-          </ul>
         </motion.div>
 
         {/* Right Scroll Indicator - Slides in from right */}
@@ -223,9 +208,9 @@ export function LandingPages({
           </span>
         </motion.div>
 
-        {/* Right Edge Image - Slides in from right */}
+        {/* Right Top Image - Slides in from right */}
         <motion.div
-          className="absolute right-[-5vw] top-[73%] md:top-[max(60%,12vh_+_16vw)] z-10"
+          className="absolute right-[-5vw] top-[8%] md:top-[8%] z-10"
           style={{ x: p1ImgX }}
         >
           <motion.img
